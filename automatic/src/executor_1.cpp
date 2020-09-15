@@ -65,7 +65,7 @@ public:
 	A(): Node("A", rclcpp::NodeOptions().start_parameter_event_publisher(false)) {
 
 
-// #define MAKE_BRAKE_PREEMPT
+#define MAKE_BRAKE_PREEMPT
 
 #ifdef MAKE_BRAKE_PREEMPT
 		int priority_brake_timer     = 3;
@@ -106,7 +106,8 @@ int main (int argc, char *argv[])
 	auto node = std::make_shared<A>();
 
 	// Init the executor
-	rclcpp::executors::PreemptivePriorityExecutor executor_1;
+	rclcpp::executors::PreemptivePriorityExecutor executor_1(rclcpp::ExecutorOptions(), {50,99}, 
+		rclcpp::executors::P_FP);
 
 	// Add node
 	executor_1.add_node(node);
