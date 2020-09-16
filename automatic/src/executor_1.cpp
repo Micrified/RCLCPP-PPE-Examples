@@ -107,7 +107,7 @@ int main (int argc, char *argv[])
 
 	// Init the executor
 	rclcpp::executors::PreemptivePriorityExecutor executor_1(rclcpp::ExecutorOptions(), {50,99}, 
-		rclcpp::executors::P_FP);
+		rclcpp::executors::NP_FP);
 
 	// Add node
 	executor_1.add_node(node);
