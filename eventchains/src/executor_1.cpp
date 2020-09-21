@@ -3,7 +3,6 @@
 #include <cstdint>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int64.hpp"
-#include "eventchains/on_callback.hpp"
 
 extern "C" {
 	#include <time.h>
@@ -152,7 +151,6 @@ private:
 			uint64_t timestamp_end   = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 			uint64_t timestamp_start = static_cast<uint64_t>(msg_recv->data);
 			uint64_t duration        = timestamp_end - timestamp_start;
-
 			std::cout << "Planning [" << global_planning_recv_count << "] end-to-end latency = " << duration << "ms" << std::endl; 
 		}
 
@@ -216,7 +214,7 @@ int main (int argc, char *argv[])
 #else
 	rclcpp::executors::MultiThreadedExecutor executor_1(rclcpp::ExecutorOptions(), 2, false, std::chrono::nanoseconds(-1));
 #endif
-
+  
 	executor_1.add_node(node_handle_Radar);
 	executor_1.add_node(node_handle_Lidar);
 	executor_1.add_node(node_handle_Control);
